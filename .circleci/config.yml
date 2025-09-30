@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.9  # Use Python 3.9
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install requests
+      - run:
+          name: Run unit tests
+          command: python -m unittest discover
+
+workflows:
+  version: 2
+  test_workflow:
+    jobs:
+      - test
